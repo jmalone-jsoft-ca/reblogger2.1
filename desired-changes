@@ -1,0 +1,136 @@
+Flexible Template - no requires architecture change
+Ascending Descending Order
+	reblogger.pl:
+		make valid_posts an array;
+		append to $template[1]; elements of valid_posts down from
+		max element, or from first element
+	comment_manager.pl:
+		add a toggle for Ascending/Descending order
+		new preference entry: comment displayAscending: ascending(1)/descending(0)	
+Date Format - text date
+	reblogger.pl
+		hash of day number->day name
+		hash of month number->month name
+	comment_manager.pl
+		control to modify date format
+		new preference entry: date format text,m/d/y
+		
+Timezoning-12/24, DST
+
+Open in window or on page
+	comment_manager.pl
+		control to select comment link format, including whether to open
+		in the same window(without javascript), or in a new window without javascript
+	reblogger.pl
+		change to load command, must generate the appropriate comment link, must
+		support old format
+
+		will generate a new javascript function(rebloggerLink) to generate link, keep
+		postCount.
+
+Installer: make backups when installing	
+*Link to original thread in email.
+*Generate code for other systems.
+Make html text an option
+
+design todo:
+
+general design changes:
+*	reblogger.pl
+	*	prefs hash
+*	comment_manger.pl
+		*new html forms
+		*prefs hash
+
+		new global vars:
+		*	$version
+		*	%prefs_hash
+
+		new subs:
+		*	writeprefs - write %prefs_hash to prefs file
+		*	getprefs - read prefs file and return hash reference to preferences
+*	adduser.pl
+*	user lower case script, with proper quotations ""
+	
+*ascendign/descending:
+*	reblogger.pl:
+	*	make valid_posts an array;
+	*	append to $template[1]; elements of valid_posts down from
+	*	max element, or from first element
+*	comment_manager.pl:
+	*	add a toggle for Ascending/Descending order
+*Date Format - text date
+*	reblogger.pl
+	*	array of day number->day name
+	*	array of month number->month name
+		change match for m/d/y to month/day/year
+*	comment_manager.pl
+		*control to modify date format
+		*new preference entry: date format text,m/d/y
+		
+		subs:
+			*showDateFormat;
+Open in window or on page
+
+
+*	comment_manager.pl
+	*	control to select comment link format, including whether to open
+	*	in the same window(without javascript), or in a new window without javascript
+	*	options: on blog(iframe),in same window, in new window
+		* 	for new window, width, height
+		*	for iframe: use template or blend, iframe width height
+			need blog url if iframe
+		*	link format(comments(0),comments[0]): specified by string with
+
+		*prefs: *linktype:newwin/iframe/samewin
+		       *linkformat:width|height|linktext|iframeblend(1/0)
+
+		subs:
+		*	showCommentLink;	
+		
+*	reblogger.pl
+
+		new javascript functions:
+		*	rebloggerLink: generate appropriate comment link
+		*	onpageReblogger: display reblogger on blog page
+			    will generate an iframe with comments in it
+		* #     replaced by pCount[item])
+	
+
+		*in show: if iframe is to be blended post only comments, omit the rest of the 
+			 template
+
+*	adduser.pl
+		*change blogger template code
+
+
+*Link to original thread in email:
+	*reblogger.pl:
+	*	add link to email
+
+*Generate code for other systems.
+*	adduser.pl
+		*add options for other systems to code generator
+
+		*radio userland: <%itemNum%>cut paste
+		*diaryland: %%date%%%%time%% - change entry pages(both code pieces) and/or
+			   each individual entry(second piece)
+		*>*diary-x: [date][time], can automat, put after [body]
+
+	    	 *Big Blog Tool: /.blogid - manual(cup paste)
+		 *>*BlogStudio: same as blogger
+    		 *Blosxom: $mo_num, $da, $hr, $min head.html,story.html
+    		 *Pitas: make custom changes, script..., then change format for
+			 each entry: %%date%%%%time%%
+    		 *>*Thingamablog: <$EntryID$>, <BlogEntry></BlogEntry>(automate)
+
+		subs:
+			*showcode($systype): display instructions for adding
+					    reblogger
+			*modifyTemplate: modify template for systems where it
+					is pheasable
+			
+
+*Make html text an option
+	*Comment Manager: add tag to template instructions
+	*Reblogger.pl: add substitution for tag

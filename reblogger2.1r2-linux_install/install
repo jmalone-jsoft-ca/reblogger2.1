@@ -1,0 +1,270 @@
+#!/bin/sh
+
+already_installed=0
+
+
+if [ "$1" = "clean" ]; then
+	rm .installer-config
+	echo "\$tz_correct = 0;" >./reblogger/time_correct
+	echo "\$month_correct = 0;" >>./reblogger/time_correct 
+	echo "\$day_correct = 0;" >>./reblogger/time_correct
+	echo "\$year_correct = 0;" >>./reblogger/time_correct
+	echo "1;" >>./reblogger/time_correct	
+fi 
+
+
+if [ -r .installer-config ]; then
+	already_installed=1
+	default=2
+
+	read  web_address base_path rb_path pw_path home_path sendmail_path url <.installer-config
+	
+
+	if [[ "$1" = "absolute" && "$home_path" = "none" ]]; then
+			echo
+			echo "Please enter the path to your web server's home directory."
+			echo "DO NOT  end with a \"/\" (Example \"/home/yourname\") :"
+			read home_path
+	fi
+
+	echo
+        echo "Here are you current path settings"
+	echo
+	echo "Web Address: "$web_address
+	echo "Path to cgi-bin: "$base_path
+	echo "Reblogger path: "$rb_path
+	echo "Password path: "$pw_path
+	echo "Home path: "$home_path
+	echo "Path to sendmail: "$sendmail_path
+	echo "Reblogger URL: "$url
+	echo
+	echo
+	echo "Are these settings ok?(y/n)"
+	read settings_ok
+fi
+
+while [ "$settings_ok" != "y" ]; do
+default=0
+
+echo
+echo "IMPORTANT: unless specified otherwise, all paths should begin and end with a \"/\""
+echo
+echo "Please enter your website address (example: http://jsoft.ca):"
+read web_address
+
+echo
+echo "Please enter the path to the cgi-bin directory on your web server."
+echo "Be sure to end with a \"/\" (default: /cgi-bin/):"
+read base_path
+
+if [ "$base_path" = "" ]; then
+	base_path="/cgi-bin/"
+fi
+
+echo
+echo "By default reblogger is installed to "$base_path"reblogger/."
+echo "If you want to install reblogger to a different directory, please enter it here:"
+read rb_path
+
+if [ "$rb_path" = "" ]; then
+	rb_path=$base_path"reblogger/"
+fi
+
+echo
+echo "If you want to put the password file in a directory other than"
+echo $rb_path"rb_pwd please enter it here:"
+read pw_path
+
+if [ "$pw_path" = "" ]; then
+	pw_path=$rb_path"rb-pwd/"
+	default=1
+fi
+
+home_path="none"
+if [[ "$1" = "absolute" || $default = 0 ]]; then
+	echo
+	echo "Please enter the path to your web server's home directory. This"
+	echo "time DO NOT  end with a \"/\" (Example \"/home/yourname\") :"
+	read home_path
+fi
+
+echo
+echo "Please enter the path to sendmail on you web server. This time DO NOT"
+echo "end with a \"/\". (Default: /usr/sbin/sendmail): "
+read sendmail_path
+
+if [ "$sendmail_path" = "" ]; then
+	sendmail_path="/usr/sbin/sendmail"
+fi
+
+echo
+echo "Based on the information you've given me I'm guessing that the URL of the"
+echo "directory where you are installing reblogger is"
+echo $web_address$rb_path
+echo "If this is not correct please enter the correct url here"
+echo "(remember to end with a \"/\"):"
+read url
+
+if [ "$url" = "" ]; then
+	url=$web_address$rb_path
+fi
+
+echo
+echo "Here are you current path settings"
+echo
+echo "Web Address: "$web_address
+echo "Path to cgi-bin: "$base_path
+echo "Reblogger path: "$rb_path
+echo "Password path: "$pw_path
+echo "Home path: "$home_path
+echo "Path to sendmail: "$sendmail_path
+echo "Reblogger URL: "$url
+echo
+echo
+echo "Are these settings ok?(y/n)"
+read settings_ok
+done
+
+
+rb_path2="./"
+pw_path2="./rb-pwd/"
+
+if [ $default = 0 ]; then
+	pw_path2=$home_path$pw_path
+fi
+if [ $default = 1 ]; then
+	pw_path2="./rb-pwd/"
+fi
+
+if [ "$1" = "absolute" ]; then
+	rb_path2=$home_path$rb_path
+	pw_path2=$home_path$pw_path
+fi
+
+if [[ ! $default = 2 || "$1" = "absolute" ]]; then
+
+    echo "\$path = \""$rb_path2"\";" >./reblogger/settings
+    echo "\$pw_path = \""$pw_path2"\";" >>./reblogger/settings
+    echo "\$url = \""$url"\";" >>./reblogger/settings
+    echo "\$sendmail = \""$sendmail_path"\";" >>./reblogger/settings
+    echo "1;" >>./reblogger/settings
+fi
+
+if [ "$1" = "time_correct" ]; then
+	echo
+	echo "If the time on your server is not in GMT or if the date is wrong you" 
+	echo "can adjust reblogger's time settings so that the" 
+	echo "time and date appear correctly. Befoe you change these settings you should"
+	echo "have reblogger installed. Make sure your reblogger time zone setting is"
+	echo "correct and post a comment. If the time or date is incorect then you can"
+	echo "compensate for it using these settings."
+	echo
+	echo
+	echo "If the hour is incorrect please enter the number of hours ahead or behind it"
+	echo "is. Example: "2" means 2 hours ahead, -2 means 2 hours behind. (default: 0)"
+	read hours
+
+	if [ "$hours" = "" ]; then
+		hours=0
+	fi
+
+	echo
+	echo "If the day is incorrect please enter the number of days ahead or behind it"
+	echo "is. Example: "2" means 2 days ahead, -2 means 2 days behind. (default: 0)"
+	read days
+
+	if [ "$days" = "" ]; then
+		days=0
+	fi
+
+	echo
+	echo "If the month is incorrect please enter the number of months ahead or behind it"
+	echo "is. Example: "2" means 2 months ahead, -2 means 2 months behind. (default: 0)"
+	read months
+
+	if [ "$months" = "" ]; then
+		months=0
+	fi
+
+	echo
+	echo "If the year is incorrect please enter the number of years ahead or behind it"
+	echo "is. Example: "2" means 2 years ahead, -2 means 2 years behind. (default: 0)"
+	read years
+
+	if [ "$years" = "" ]; then
+		years=0
+	fi
+
+	echo "\$tz_correct = "$hours";" >./reblogger/time_correct
+	echo "\$month_correct = "$months";" >>./reblogger/time_correct 
+	echo "\$day_correct = "$days";" >>./reblogger/time_correct
+	echo "\$year_correct = "$years";" >>./reblogger/time_correct
+	echo "1;" >>./reblogger/time_correct
+
+fi
+
+echo
+echo "Please enter the ftp host name or ip address where you want"
+echo "to install reblogger (Example: ftp.yoursite.com):"
+read ftp_host
+
+echo
+echo -n "Please enter your ftp user name:"
+read ftp_user
+echo -n "Please enter your ftp password:"
+read ftp_pass
+
+
+echo "prompt" >./reblogger-ftp
+echo "open "$ftp_host >>./reblogger-ftp
+echo "user "$ftp_user" "$ftp_pass >>./reblogger-ftp
+
+
+
+if [ $already_installed = 0 ]; then
+	echo "mkdir ".$rb_path >>./reblogger-ftp
+	echo "chmod 777 ".$rb_path >>./reblogger-ftp
+	echo "mkdir ".$pw_path >>./reblogger-ftp
+
+	echo "send ./reblogger/rb-pwd/rblist.cgi ".$pw_path"rblist.cgi" >>./reblogger-ftp
+	echo "chmod 766 ".$pw_path"rblist.cgi" >>./reblogger-ftp
+	echo "send ./reblogger/rb-pwd/count.dat ".$pw_path"count.dat" >>./reblogger-ftp
+	echo "chmod 766 ".$pw_path"count.dat" >>./reblogger-ftp
+	echo "send ./reblogger/rb-pwd/usr_current.cgi ".$pw_path"usr_current.cgi" >>./reblogger-ftp
+	echo "chmod 766 ".$pw_path"usr_current.cgi" >>./reblogger-ftp
+
+
+fi
+
+echo "send ./reblogger/adduser.pl ".$rb_path"adduser.pl" >>./reblogger-ftp
+echo "chmod 755 ".$rb_path"adduser.pl" >>./reblogger-ftp
+echo "send ./reblogger/reblogger.pl ".$rb_path"reblogger.pl" >>./reblogger-ftp
+echo "chmod 755 ".$rb_path"reblogger.pl" >>./reblogger-ftp
+echo "send ./reblogger/comment_manager.pl ".$rb_path"comment_manager.pl" >>./reblogger-ftp
+echo "chmod 755 ".$rb_path"comment_manager.pl" >>./reblogger-ftp
+echo "send ./reblogger/blog-template-code.pl ".$rb_path"blog-template-code.pl" >>./reblogger-ftp
+echo "chmod 755 ".$rb_path"blog-template-code.pl" >>./reblogger-ftp
+
+echo "send ./reblogger/settings ".$rb_path"settings" >>./reblogger-ftp
+echo "chmod 744 ".$rb_path"settings" >>./reblogger-ftp
+echo "send ./reblogger/time_correct ".$rb_path"time_correct">>./reblogger-ftp 
+echo "chmod 744 ".$rb_path"time_correct" >>./reblogger-ftp
+
+echo "cd "$rb_path >>./reblogger-ftp
+echo "send ./reblogger/LogoR.gif ../../LogoR.gif" >>./reblogger-ftp
+
+echo
+echo "saving path information..."
+
+echo $web_address $base_path $rb_path $pw_path $home_path $sendmail_path $url >.installer-config
+
+echo
+echo "uploading reblogger......"
+ftp -nv <./reblogger-ftp
+
+rm ./reblogger-ftp
+
+echo
+echo "all done".
+echo "Have a nice day!"
+exit 0

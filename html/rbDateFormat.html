@@ -1,0 +1,47 @@
+<HTML>
+   <HEAD>
+   <TITLE>Reblogger Comment Manager</TITLE>
+   <STYLE type=text/css>
+	BODY {FONT-FAMILY:verdana, helvetica, arial}
+	A:visited {COLOR: #ffffff; TEXT-DECORATION: underline;}
+	A:link {COLOR: #ffffff; TEXT-DECORATION: underline;}
+        A:hover {COLOR: #d45700; TEXT-DECORATION: none;}
+	A:unknown {COLOR: #ffffff; TEXT-DECORATION: underline;}
+   </STYLE>
+   
+   </HEAD>
+
+<BODY bgcolor=002367 text=ffffff>
+<TABLE align=right width=100% height=100% bgcolor=000000>
+   <TR><TD valign=bottom width=100% align=right><FONT size=5><I>Reblogger</I><br><font size=1>Version: $version</TD><TD valign=top align=right><IMG src="../../LogoR.gif"></TD></TR>
+   <TR>
+      <TD valign=top bgcolor=002367 colspan=2 height=100%>
+	 <font size=5><I>Reblogger Comment Manager</I></font>
+	 <table align=center width=90%>
+	    <tr><td valign=top>
+		 <font size=2>
+		 <br><br>
+	    </td></tr>
+	    <tr>
+		<td valign=top>
+		    <font face=verdana size=2>
+		    <table width=50% align=center>
+		    <tr><td valign=top><font size=2>
+		      Please select the date format you would like to use in comments.("text" means date is displayed in this format: Monday May 17, 2004)<br><br>
+		      <form method="post" action="$url">
+		    	<select style="color:a3a3a3;background-color:002394;border-color:0023d4" name="dformat"><option>text<option>month/day/year<option>day/month/year</select><br><br>
+			<input type="hidden" name="count" value=\"$count\">
+			<input type="hidden" name="user" value=\"$user\">
+			<input type="submit" style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Save Date Format">
+			
+		      </form>
+		    </td></tr>
+		    </table>
+		</td>
+	       </tr>
+	 </table> 
+      </TD>
+   </TR>
+</TABLE>
+</BODY>
+</HTML>

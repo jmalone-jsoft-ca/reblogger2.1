@@ -1,0 +1,58 @@
+<HTML>
+   <HEAD>
+   <TITLE>Reblogger Comment Manager</TITLE>
+   <STYLE type=text/css name=norm>
+	BODY {FONT-FAMILY:verdana, helvetica, arial}
+	A:visited {COLOR: #ffffff; TEXT-DECORATION: underline;}
+	A:link {COLOR: #ffffff; TEXT-DECORATION: underline;}
+        A:hover {COLOR: #d45700; TEXT-DECORATION: none;}
+	A:unknown {COLOR: #ffffff; TEXT-DECORATION: underline;}
+   </STYLE>
+   
+   </HEAD>
+
+<BODY bgcolor=002367 text=ffffff>
+<TABLE align=right width=100% height=100% bgcolor=000000>
+   <TR><TD valign=bottom width=100% align=right><FONT size=5><I>Reblogger</I><br><font size=1>Version: $version</TD><TD valign=top align=right><IMG src="../../LogoR.gif"></TD></TR>
+   <TR>
+      <TD valign=top bgcolor=002367 colspan=2 height=100%>
+	 <font size=5><I>Reblogger Comment Manager</I></font>
+	 <table align=center width=90%>
+	    <tr><td valign=top>
+		 <font size=3>
+		 <br><br>Welcome to the comment manager. Here you will find a number of tools to customize your Reblogger.<br><br>
+	    </td></tr>
+	    <tr>
+		<td valign=top>
+		    <font size=2>
+		    <b>Reblogger User Name: $user<br>
+		    <b>Comment Display: $display_order<br>
+		    <b>Time Zone: $time_zone<br>
+		    <b>Date Format: $prefs_hash{dateformat}<br>
+		    <b>E-Mail Notification: $email_status<br>
+		    <b>Blocking: $blocking
+		</td>
+		<td valign=top align=left>
+		   <font size=2>Things To Do:
+		   <br><br>
+		   <form method=POST action="$url">
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="$display_order_command"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="$email_command"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Change Template"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Set Time Zone"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Change Comment Link"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Change Date Format"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Remove Unwanted Comments"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="IP Blocking"><br><br>
+		   <input type=submit style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Remove Account"><br><br>
+		   <input type=hidden name=count value=$count>
+		   <input type=hidden name=user value=$user>
+		   </form>
+	         </td>
+	       </tr>
+	 </table> 
+      </TD>
+   </TR>
+</TABLE>
+</BODY>
+</HTML>

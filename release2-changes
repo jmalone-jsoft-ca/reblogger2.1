@@ -1,0 +1,8 @@
+*fix scrollbar problem: try
+don't show empty links 
+
+
+adduser.pl
+	change default template
+reblogger.pl
+	no more empty links

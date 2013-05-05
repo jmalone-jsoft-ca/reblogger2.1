@@ -1,0 +1,5 @@
+$path = "./";
+$pw_path = "./rb-pwd/";
+$url = "http://your-web-address/cgi-bin/reblogger/";
+$sendmail = "/usr/sbin/sendmail";
+1;

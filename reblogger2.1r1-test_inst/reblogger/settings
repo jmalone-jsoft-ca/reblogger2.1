@@ -1,0 +1,5 @@
+$path = "./";
+$pw_path = "./rb-pwd/";
+$url = "http://jsoft.ca/~jesse/cgi-bin/reblogger2.1-install_test/";
+$sendmail = "/usr/sbin/sendmail";
+1;

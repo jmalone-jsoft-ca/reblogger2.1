@@ -1,0 +1,54 @@
+<HTML>
+   <HEAD>
+   <TITLE>Reblogger Comment Manager</TITLE>
+   <STYLE type=text/css>
+	BODY {FONT-FAMILY:verdana, helvetica, arial}
+	A:visited {COLOR: #ffffff; TEXT-DECORATION: underline;}
+	A:link {COLOR: #ffffff; TEXT-DECORATION: underline;}
+        A:hover {COLOR: #d45700; TEXT-DECORATION: none;}
+	A:unknown {COLOR: #ffffff; TEXT-DECORATION: underline;}
+   </STYLE>
+   
+   </HEAD>
+
+<BODY bgcolor=002367 text=ffffff>
+<TABLE align=right width=100% height=100% bgcolor=000000>
+   <TR><TD valign=bottom width=100% align=right><FONT size=5><I>Reblogger</I><br><font size=1>Version: $version</TD><TD valign=top align=right><IMG src="../../LogoR.gif"></TD></TR>
+   <TR>
+      <TD valign=top bgcolor=002367 colspan=2 height=100%>
+	 <font size=5><I>Reblogger Comment Manager</I></font>
+	 <table align=center width=90%>
+	    <tr><td valign=top>
+		 <font size=2>
+		 <br><br>
+	    </td></tr>
+	    <tr>
+		<td valign=top>
+		    <font face=verdana size=2>
+		    <table width=50% align=center>
+		    <tr><td valign=top><font size=2>
+		      Please select the way you want reblogger to be displayed. <br><br>
+		      <form method="post" action="$url">
+			<input type="radio" name="linktype" value="newwin">Open Reblogger in a new window<br>
+			<input type="radio" name="linktype" value="iframe">Open Reblogger on my blog (ie. display the comments directly below the post they correspond to)<br>
+			<input type="radio" name="linktype" value="samewin">Open Reblogger in the same window as my blog<br>
+			<p>Please specifty the width and height of the comment window(this also sets the size of the frame in which comments appear on your blog if you selected "Open Reblogger on your blog")</p>
+			width: <input type="text" size="5" name="width" value=\"$cwidth\"> height: <input type="text" size="5" name="height" value=\"$cheight\"><br><br>
+			<input type="checkbox" name="blend"> If comments are being displayed on my blog, use the same fonts and colours as my blog.
+			<p>Please specify the text that should appear in the comment link. Use the # symbol to indicate where the comment count should appear</p>
+			<input type="text" size="20" name="linktext" value=\"$linktext\"><br><br>
+			<input type="hidden" name="count" value=\"$count\">
+			<input type="hidden" name="user" value=\"$user\">
+			<input type="submit" style="color:a3a3a3;background-color:002394;border-color:0023d4" name="command" value="Save Comment Link">
+			
+		      </form>
+		    </td></tr>
+		    </table>
+		</td>
+	       </tr>
+	 </table> 
+      </TD>
+   </TR>
+</TABLE>
+</BODY>
+</HTML>

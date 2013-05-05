@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta name="Author" content="Jesse Malone" />
+	<meta name="keywords" content="jsoft,j-soft,jesse,malone,web,reblogger,design,software" />
+	<title>jsoft.ca</title>
+	<style type="text/css">
+
+		h1 {
+			font-size: 20pt;
+			text-align: center;
+		}
+		h2 {
+			font-size: 18pt;
+		}
+		table.main {
+			width: 100%;
+			background-color: #000034;
+		}
+
+
+		body {
+			font-family: clean, lucida console, helvetica, arial;
+			font-style: normal;
+			background-color: #000045;
+			color: #a3a4c7;
+		}
+		table {
+			width:100%;
+			background-color: #000045;
+		}
+		td {
+			border-spacing: 0px;
+			border-width: 0px;
+			border-color: transparent;
+			border-style: solid;
+			background-color: transparent;
+		}
+		div {
+			border-width:0px;
+		}
+		td.uline {
+			border-bottom-color:#435577;
+			border-bottom-width:3px;
+		}
+		td.topnav {
+			font-family:clean, lucida console, helvetica, arial;
+			width:117px;
+			padding:0px;
+			height:1em;
+			border-width: 1px;
+			border-color: #435577;
+			background-color: #071757;
+			text-align:center;
+			cursor:pointer;
+		}
+		
+		td.sbar {
+			width:134px;
+			height:100%;
+			vertical-align:top;
+		}
+		td.main {
+			padding:0px;
+			height:100%;
+			
+			vertical-align:top;
+		}
+		div.td-main {
+			height: 100%;
+			font-family: clean, lucida console, helvetica, arial;
+			border-style:solid;
+			border-color:#435577;
+			border-width: 1px;
+			background-color:#000034;
+			padding: 10px;
+			color: #a3a4c7;
+		}
+		div.sbMessage {
+			position:absolute;
+			width:131px;
+			top:192px;
+			visibility:hidden;
+			background-color:#000034;
+			border-style:solid;
+			border-color:#435577;
+			border-width:1px;
+		}	
+		div.menu {
+			position:absolute;
+			width:117px;
+			visibility:hidden;
+		}
+		div.sbar {
+			font-family: clean, helvetica, arial;
+			position:absolute;
+			width:131px;
+			background-color:#000034;
+			border-style:solid;
+			border-color:#435577;
+			border-width:1px;
+			color:#a3a4c7;
+		}	
+		
+		div.hidden {
+			visibility:hidden;
+			color:#000045;
+		}
+
+		a {
+			font-style:normal;
+			text-decoration:underline;
+			color:#435597;
+		}
+		a:hover {color:#4365c7;}
+		a:visited {color:#435577;}
+
+		a.topnav {
+			font-style:normal;
+			text-decoration:none;
+			color:#a3a4c7;
+		}
+		
+		p.contacts {
+			font-size:11pt;
+		}	
+
+	</style>
+</head>
+<body>
+<table>
+	<tr>
+		<td class="sbar" width="131px">
+			<div class="hidden">t7</div>
+		</td>
+		<td class="main" colspan="4"><div class="td-main">
+			<?php include('topnav.html'); ?>
+			<h1>Reblogger</h1>
+			<h2>Installation The Easy Way(that's the plan in any case)</h2>
+			<p style="padding-bottom:10px">If you are using Linux/Unix or Windows/DOS installation should be pretty easy(assuming I haven't screwed up). Once you've extracted the archive run the file called "install"(or install.bat if you're using Windows). Now the installer will ask you some questions to get an idea about where on your server reblogger will reside. Follow the instructions carefully(the installer is not very smart).</p>
+			<table class="main" align="center">
+				<tr><th width="25%" valign="top" align="left">Website Address:</th><td>This one's a no brainer, just enter the URL of the website where you are installing reblogger. Just don't forget to start with http://</td></tr>
+				<tr><th width="25%" valign="top" align="left">Path to cgi-bin:</th><td>In most cases cgi scripts can only be run from the cgi-bin directory. Here you must specify the path to your cgi-bin. In most cases this will be /cgi-bin/ meaning you can enter nothing since /cgi-bin/ is the default. In some cases all of your website might be placed in a directory like /public_html/, in which case the path cgi-bin will most likely be /public_html/cgi-bin/. If on your server, scripts can be executed in any directory(no cgi-bin) then just leave this blank.</td></tr>
+				<tr><th width="25%" valign="top" align="left">Reblogger install directory:</th><td>If you are one of those people who doesn't have a cgi-bin you need to change this to something other than the default(try /reblogger/). Otherwise you probably won't need to change this.<td></tr>
+				<tr><th width="25%" valign="top" align="left">Password directory:</th><td>This allows you to specify where you want to store important things like your password. Again, unless you want to use something else you should just go with the default(just leave it blank)</td></tr>
+				<tr><th width="25%" valign="top" align="left">Path to sendmail:</th><td>Reblogger uses sendmail to send any of the emails it needs to send(email notification, login information). The default will probably work. If it doesn't you should find out from your web host where sendmail is stored and if they allow cgi scripts to use sendmail. Reblogger will still work without sendmail, but it won't be able to send you any email.</td></tr>
+				<tr><th width="25%" valign="top" align="left">Reblogger's URL:</th><td>Once you've entered all of this information the installer will try to figure out what the web address of the the reblogger directory is. It should get it right, unless your website is stored in a directory like public_html. If that is the case /public_html will appear in the url when it shouldn't. Just type in the correct url. In most cases this will be http://your-web-address/cgi-bin/reblogger/</td>
+				<tr><th width="25%" valign="top" align="left">Time to Upload:</td><td>The installer will show you a list of the things you just entered. If everything is right enter "y". The installer will now ftp reblogger to your website. Once it's done reblogger should be ready to use</td></tr>
+			</table>
+		
+			<h2>Installer Command Line Options</h2>
+			<p>The installer has three command line options.(if you're using windows you'll have to open a dos window to use these commands)</p>
+			<table class="main" align="center">
+				<tr><th width="165px" valign="top" align="left">install absolute</th><td>Relative paths might not work on some servers. This will install reblogger using absolute paths. This is covered in more detail later on under "$&%#@% It's Not Working!!".</td>
+				<tr><th width="165px" valign="top" align="left">install time_correct</th><td>If, after setting your time zone in the comment manager, comments still don't appear with the correct time or date posted you can use this option to adjust reblogger's time settings so that the time and date appear correctly.</td>
+				<tr><th width="165px" valign="top" align="left">install clean</th><td>This option will remove the saved settings from your last install and will ask you to enter the settings again. It will also overwrite all of the reblogger files on your web server, this means you will lose any of your already existing user accounts.</td>
+			</table>
+			<h2>Installation The Hard Way</h2>
+			<p>Sorry to all you MAC users, I don't have a mac version of the install script. The unix shell script might work in MacOS X, but I haven't tried it so I don't know. So you'll have to do some editing before you put reblogger on your web server.</p>
+			<p>Open the file called "settings". It will look like this:</p>
+			<p style="font-family:courier">$path = "./";<br>$pw_path = "./rb-pwd/";<br>$url = "http://your-web-address/cgi-bin/reblogger/";<br>$sendmail = "/usr/sbin/sendmail";<br>1;</p>
+			<p>$path specifies where on your server reblogger will be stored. If your webserver supports relative paths, which in all likelyhood it does, you don't need to change this. Otherwise you need to put in the full path to reblogger's directory(like /home/your-website/cgi-bin/reblogger/)</p>
+			<p>$pw_path specifies where your password file and list of logged in users will be stored. Again, like $path, you probably won't need to change this</p>
+			<p>$url. You will need to change this to the url where you have installed reblogger. (for instance I had to change it to $url = "http://jsoft.ca/cgi-bin/reblogger/")</p>
+			<p>$sendmail is the path to sendmail on your web server. You probably won't need to change this. If you find that reblogger's email features are not working you might have to find out from your web host where sendmail is, and then change this value.</p>
+			<p>Now you need to upload reblogger to your web server. Get out your favourite ftp client and login to your web server. First create the directory where you want to install reblogger. If you have a cgi-bin, reblogger's directory should be in your cgi-bin directory. If you specified the full path to reblogger in the "settings" file, make sure that the directory you create for reblogger is exactly what you entered in "settings". Now upload all of the reblogger files into this directory.</p>
+			<p>If your web server is running a unix like operating system you will need to set the permissions(use chmod) of all the reblogger files.</p>
+			<p>Reblogger's directory should be 777(rwxrwxrwx). All of the .pl files should be 755(rwxr-xr-x). The files "settings" and "time_correct" should be 744(rwxr--r--), and all of the files in your password directory(rb-pwd) should be 766(rwxrw-rw-).</p>
+			<h2>It's installed, now what?</h2>
+			<p>Now that reblogger is installed you should create a user account for yourself. To do this go to http://your-web-address/wherever-you-installed-reblogger/adduser.pl and follow the instructions. Once your account is created you will be taken to the comment manager ( http://your-web-address/wherever-you-installed-<br\>reblogger/comment_manager.pl ), where you can tinker with reblogger's settings. Everything is very straight forward, and anything that needs explaining is explained online, so in the interest of avoiding redundency I won't put it all here.</p>
+			<h2>Creating multiple accounts</h2>
+			<p>Reblogger can be used by just one person for one blog, or one person for a few blogs, or by many people for many blogs. You can allow as many(or as few) people as you want to use reblogger on your server. I use it for myself and a small number of other people(I don't have the resources to host comments for the general public). The idea behind this is that you can host comments for yourself, and people you know. If, however, you somehow have more bandwidth and storage than you know what to do with you could host comments for anyone who wants them(if this is you, tell me who you are, I will put up a link to you).</p>
+			<p>Enough talk...here's how you do it. Open adduser.pl in a text editor and look for the big box with the text $max_users = 1; in it. just change the 1 to whatever number of users you want to allow. Let's say you have another blog that you want comments for. Change this number to 2. Run the install program to upload the changed file, and then run adduser.pl to create your second account.</p>  
+			<h2>$&%#@% It's Not Working!!</h2>
+			<p>A lot of problems can occur if the file permissions are not correct(you only have to worry about this if you did a manual install). Make sure the file permissions are correct.</p>
+			<p>if your web server is apache it might have suEXEC enabled, in which case you should change the permissions on reblogger's directory to 755(rwxr-xr-x).</p>
+			<p>If the program just won't run(you keep getting internal server errors), and you've already made sure the file permissions are correct, check with your web host what the path to perl is. If it is not /usr/bin/perl, you will have to edit the three .pl files and change /usr/bin/perl(on the first line) to whatever your web host's path to perl is and then run install to upload the modified files.</p>
+			<p>If adduser.pl runs, but you get an error when you try to create a user you might try using the absolute install option(type "install absolute"). You will have to find out from your web host what your home path is.</p>
+		</div></td>
+	</tr>
+</table>
+</body>
+</html>
